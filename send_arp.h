@@ -41,24 +41,19 @@ int reply(const char *dev, pcap_t *pcap, u_int8_t *ip, u_int8_t *mac, u_int8_t *
 {
     struct pcap_pkthdr *header;
     const u_char *packet;
+    int res = pcap_next_ex(pcap, &header, &packet);
+    if (res != 1)
+    {
+        printf("error!\n");
+        return -1;
+    }
     EthArpPacket *arppkt;
     arppkt = (EthArpPacket *)packet;
-    // while (1)
-    // {
-    int res = pcap_next_ex(pcap, &header, &packet);
-    //     if (res != 1)
-    //     {
-    //         printf("error!\n");
-    //         return -1;
-    //     }
-    //     if (arppkt->eth_.type_ == htons(EthHdr::Arp) && arppkt->arp_.pro_ == htons(EthHdr::Ip4) && if_same_mac(arppkt->arp_.tmac_, mymac) && if_same_ip(arppkt->arp_.sip, ip))
-    //     {
-    //         break;
-    //     }
-    // }
-    print_mac(arppkt->arp_.smac_);
+    if (arppkt->eth_.type_ == htons(EthHdr::Arp) && arppkt->arp_.pro_ == htons(EthHdr::Ip4) && if_same_mac(arppkt->arp_.tmac_, mymac) && if_same_ip(arppkt->arp_.sip, ip))
+    {
+        print_mac(arppkt->arp_.smac_);
+    }
     copy_mac(arppkt->arp_.smac_, mac);
-
     return 0;
 }
 
