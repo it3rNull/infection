@@ -103,10 +103,12 @@ bool check_http(u_char *payload)
 
 void copy_payload(char *src, char *dst)
 {
-    for (int i = 0; i < strlen(src); i++)
+    int i = 0;
+    for (i; i < strlen(src); i++)
     {
         dst[i] = src[i];
     }
+    dst[i] = 0;
 }
 
 void fix_len(u_int16_t *origin, u_int16_t fix)
