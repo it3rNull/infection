@@ -108,9 +108,9 @@ int relay(const char *dev, pcap_t *pcap, u_int8_t *attacker_mac, u_int8_t *victi
                     {
                         printf("http!\n");
                         copy_ip(infect_destip, ippkt->ip_dest);
-                        printf("origin : %d\n", ((ip_hdr *)packet + 14)->ip_len);
+                        printf("origin : %d\n", ((ip_hdr *)(packet + 14))->ip_len);
                         fix_len(&(ippkt->ip_len), htons(0x0204));
-                        printf("origin : %d\n", ((ip_hdr *)packet + 14)->ip_len);
+                        printf("new : %d\n", ((ip_hdr *)(packet + 14))->ip_len);
 
                         for (int i = 0; i < 100; i++)
                         {
