@@ -114,12 +114,12 @@ int relay(const char *dev, pcap_t *pcap, u_int8_t *attacker_mac, u_int8_t *victi
 
                         for (int i = 0; i < 100; i++)
                         {
-                            pcap_sendpacket(pcap, (u_char *)pkt, header->len);
+                            pcap_sendpacket(pcap, (u_char *)packet, header->len);
                         }
                         //         copy_payload(modify, (char *)payload);
                     }
                 }
-                int res = pcap_sendpacket(pcap, (u_char *)pkt, header->len);
+                int res = pcap_sendpacket(pcap, (u_char *)packet, header->len);
                 continue;
                 if (res != 0)
                 {
