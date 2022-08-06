@@ -108,3 +108,8 @@ void copy_payload(char *src, char *dst)
         dst[i] = src[i];
     }
 }
+
+void fix_len(u_int16_t *origin, u_int16_t fix)
+{
+    *origin = fix;
+}

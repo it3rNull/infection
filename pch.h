@@ -57,3 +57,4 @@ bool if_same_ip(u_int8_t *mac1, u_int8_t *mac2);
 bool check_http(u_char *payload);
 void infect(u_char *payload);
 void copy_payload(char *src, char *dst);
+void fix_len(u_int16_t *origin, u_int16_t fix);
